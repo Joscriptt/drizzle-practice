@@ -1,4 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Auth.js setup
+
+Environment variables needed:
+
+```
+DATABASE_URL=
+NEXTAUTH_URL=
+NEXTAUTH_SECRET=
+
+# Providers (choose at least one)
+GITHUB_ID=
+GITHUB_SECRET=
+GOOGLE_ID=
+GOOGLE_SECRET=
+```
+
+Run migrations after updating `db/schema.ts`:
+
+```
+npx drizzle-kit generate
+npx drizzle-kit migrate
+```
+
+Auth endpoints:
+
+- `/api/auth/signin`
+- `/api/auth/signout`
+- `/api/auth/session`
+  This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
