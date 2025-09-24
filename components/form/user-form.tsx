@@ -40,7 +40,7 @@ const formSchema = z.object({
 interface UserFormProps {
   onSuccess?: () => void;
   initialData?: Partial<z.infer<typeof formSchema>>;
-  mode: "create" | "update";
+  // mode: "create" | "update";
   userId?: string;
 }
 
@@ -301,3 +301,5 @@ UserFormProps) {
     </Form>
   );
 }
+
+// there's a problem, if i ign in using Oauth, i get the userdata and i can log them out but if i do with credentials, it signs me in but i'm unable to gt the data, not logs

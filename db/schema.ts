@@ -11,7 +11,7 @@ import {
 import type { AdapterAccountType } from "@auth/core/adapters";
 
 // Existing application users table
-export const sampleUsers = pgTable("users", {
+export const sampleUsers = pgTable("sampleusers", {
   id: uuid("id").primaryKey().defaultRandom(),
   email: text("email").notNull().unique(),
   username: text("username").notNull().unique(),
@@ -35,23 +35,25 @@ export const users = pgTable("user", {
   image: text("image"),
 });
 
+export type Users = typeof users.$inferSelect;
+
 // Auth.js compatible tables. These use a separate namespace/table names to avoid conflicts
-export const authUsers = pgTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name"),
-  email: text("email").unique(),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
-  image: text("image"),
-});
+// export const authUsers = pgTable("auth_user", {
+//   id: text("id")
+//     .primaryKey()
+//     .$defaultFn(() => crypto.randomUUID()),
+//   name: text("name"),
+//   email: text("email").unique(),
+//   emailVerified: timestamp("emailVerified", { mode: "date" }),
+//   image: text("image"),
+// });
 
 export const accounts = pgTable(
   "account",
   {
     userId: text("userId")
       .notNull()
-      .references(() => authUsers.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccountType>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
@@ -76,7 +78,7 @@ export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
-    .references(() => authUsers.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
 });
 
@@ -102,7 +104,7 @@ export const authenticators = pgTable(
     credentialID: text("credentialID").notNull().unique(),
     userId: text("userId")
       .notNull()
-      .references(() => authUsers.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: text("providerAccountId").notNull(),
     credentialPublicKey: text("credentialPublicKey").notNull(),
     counter: integer("counter").notNull(),

@@ -36,7 +36,7 @@ const TrashBinMinimalistic2Bold = ({
   const [open, setOpen] = React.useState(false);
   const progressInterval = useRef<NodeJS.Timeout>(null!);
   const router = useRouter();
-  const [isPending, startTransition] = React.useTransition();
+  const [_isPending, startTransition] = React.useTransition();
 
   // async function handleDelte() {
   //   await deleteUser(deleteId);

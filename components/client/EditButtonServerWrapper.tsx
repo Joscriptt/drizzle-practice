@@ -1,4 +1,4 @@
-import TextEditStyle, { TextEditStyleProps } from "./edit";
+import TextEditStyle from "./edit";
 import { getUserById } from "@/server/user";
 
 interface EditButtonServerWrapperProps {

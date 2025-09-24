@@ -31,7 +31,7 @@ export async function updateUserProfile(
 ) {
   await db.update(users).set(data).where(eq(users.id, userId));
 
-  revalidatePath("/profile");
+  revalidatePath("/");
 }
 
 export async function getUser(email: string) {

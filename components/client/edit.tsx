@@ -98,7 +98,7 @@ const TextEditStyle = ({
   const { isSubmitting } = form.formState;
   const route = useRouter();
 
-  const upDatede = async (values: z.infer<typeof formSchema>) => {
+  const upDate = async (values: z.infer<typeof formSchema>) => {
     try {
       await updateUser({
         id: editId,
@@ -109,8 +109,8 @@ const TextEditStyle = ({
         password: values.password || "",
         location: values.location,
       });
-      setOpen(false);
       route.refresh();
+      setOpen(false);
     } catch (error) {
       console.error("Failed to update user:", error);
     }
@@ -157,7 +157,7 @@ const TextEditStyle = ({
           </DialogHeader>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(upDatede)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(upDate)} className="space-y-8">
               <FormField
                 control={form.control}
                 name="email"

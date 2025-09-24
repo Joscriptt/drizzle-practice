@@ -20,11 +20,6 @@ function AddOnSuc() {
   const [open, setOpen] = React.useState(false);
   const [selectedUser, setSelectedUser] = useState<UserSample | null>(null);
 
-  // const handleEdit = (user: User) => {
-  //   setOpen(true);
-  //   setSelectedUser(user);
-  // };
-
   const handleClose = () => {
     setSelectedUser(null);
     setOpen(false);
@@ -50,7 +45,7 @@ function AddOnSuc() {
             : "Fill in the form below to add a new user to the system."}
         </DialogDescription>
         <UserForm
-          mode={selectedUser ? "update" : "create"}
+          // mode={selectedUser ? "update" : "create"}
           userId={selectedUser?.id}
           initialData={
             selectedUser
