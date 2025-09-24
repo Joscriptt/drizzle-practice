@@ -51,6 +51,11 @@ const formSchema = z.object({
   password: z.string().optional(),
 });
 
+export const formatNumber = (num?: number) => {
+  if (num === undefined || num === null) return "";
+  return num.toLocaleString(); // e.g., 1234567 → "1,234,567"
+};
+
 export type TextEditStyleProps = React.SVGProps<SVGSVGElement> & {
   size: string;
   editId: string;
@@ -152,7 +157,7 @@ const TextEditStyle = ({
           <DialogHeader>
             <DialogTitle>Edit Item</DialogTitle>
             <DialogDescription>
-              This action will Update the item.
+              This action will Update the item. winks
             </DialogDescription>
           </DialogHeader>
 
@@ -180,6 +185,43 @@ const TextEditStyle = ({
                     <FormLabel>Edit Your Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Your Username" {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="balance"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Edit Your balance</FormLabel>
+                    <FormControl>
+                      {/* <Input placeholder="Your your balance" {...field} /> */}
+                      <Input
+                        type="text" // use text to control formatting
+                        placeholder="Your Balance"
+                        value={formatNumber(field.value ?? "")}
+                        onChange={(e) => {
+                          const val = e.target.value;
+
+                          // allow empty input
+                          if (val === "") {
+                            field.onChange(undefined); // keep undefined when empty
+                            return;
+                          }
+
+                          // remove leading zeros
+                          let numeric = val.replace(/^0+/, "");
+
+                          // allow only digits
+                          numeric = numeric.replace(/[^0-9]/g, "");
+
+                          // convert to number
+                          field.onChange(Number(numeric));
+                        }}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -278,7 +320,6 @@ const TextEditStyle = ({
                   </FormItem>
                 )}
               />
-
               <div className=" flex items-center gap-x-4">
                 <Button
                   className="cursor-pointer"

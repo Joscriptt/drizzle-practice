@@ -32,6 +32,13 @@ export default async function ComponentTable() {
     0
   );
 
+  const formatNumber = (num?: string) => {
+    return new Intl.NumberFormat("en-GB", {
+      style: "currency",
+      currency: "GBP",
+    }).format(Number(num) || 0);
+  };
+
   return (
     <div>
       <Table>
@@ -73,7 +80,7 @@ export default async function ComponentTable() {
                 </div>
               </TableCell>
               <TableCell>{item.location}</TableCell>
-              <TableCell>{item.balance}</TableCell>
+              <TableCell>{formatNumber(item.balance)}</TableCell>
               <TableCell>
                 {/* <Button variant="ghost" size="sm" onClick={() => onEdit(user)}>
                   Edit
