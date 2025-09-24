@@ -55,7 +55,7 @@ UserFormProps) {
     defaultValues: {
       username: initialData?.username || "",
       email: initialData?.email || "",
-      balance: initialData?.balance || 0,
+      balance: initialData?.balance,
       location: initialData?.location || "",
       status: initialData?.status || "",
     },

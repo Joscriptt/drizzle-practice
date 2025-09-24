@@ -106,7 +106,11 @@ export default function LoginForm() {
                         Forgot your password?
                       </Link> */}
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
