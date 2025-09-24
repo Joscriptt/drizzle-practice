@@ -219,7 +219,7 @@ UserFormProps) {
               <FormLabel>Enter your Location</FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a Location" />
                   </SelectTrigger>
                   <SelectContent>
@@ -247,7 +247,7 @@ UserFormProps) {
               <FormLabel>Enter your Status</FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a Status" />
                   </SelectTrigger>
 
