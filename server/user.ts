@@ -40,6 +40,7 @@ export const getAuthUser = async (id: string) => {
 
   if (!userData[0]) {
     // console.log("No user found with id:", id);
+    // return null;
     return null;
   }
 
