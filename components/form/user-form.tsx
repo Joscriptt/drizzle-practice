@@ -117,30 +117,6 @@ UserFormProps) {
         form.reset();
         onSuccess?.();
       }
-
-      // if (mode === "create") {
-      //   result = await createuser({
-      //     ...values,
-      //     balance: String(values.balance),
-      //     password: generatePassword(12), // Generate a random password
-      //   });
-      // } else {
-      //   // Handle error
-
-      //   result = await updateUser({
-      //     ...values,
-      //     id: userId!,
-      //     balance: String(values.balance),
-      //     password: values.password || initialData?.password || "",
-      //   });
-      //   // console.error(result?.error);
-      // }
-
-      // if (result && "success" in result && result.success) {
-      //   form.reset();
-      //   onSuccess?.(); // Call the success callback
-      //   // Show success message
-      // }
     } catch (error) {
       console.error("Failed to submit:", error);
     }
@@ -160,21 +136,6 @@ UserFormProps) {
   ];
 
   const statuses = ["Active", "Inactive", "Pending", "Banned"];
-
-  // function selectYourLocation() {
-  //   return (
-  //     <select
-  //       title="Select your location"
-  //       className="w-full p-2 border border-gray-300 rounded-md"
-  //     >
-  //       {locations.map((location) => (
-  //         <option key={location} value={location}>
-  //           {location}
-  //         </option>
-  //       ))}
-  //     </select>
-  //   );
-  // }
 
   return (
     <Form {...form}>
@@ -202,11 +163,32 @@ UserFormProps) {
             <FormItem>
               <FormLabel>Enter your balance</FormLabel>
               <FormControl>
-                <Input
+                {/* <Input
                   type="number"
                   placeholder="Your Balance"
                   {...field}
                   onChange={(e) => field.onChange(Number(e.target.value))}
+                /> */}
+                <Input
+                  type="text" // use text to fully control formatting
+                  placeholder="Your Balance"
+                  value={field.value ?? ""}
+                  onChange={(e) => {
+                    let value = e.target.value;
+
+                    if (value === "") {
+                      field.onChange(undefined); // or null if you prefer
+                      return;
+                    }
+
+                    // remove leading zeros
+                    value = value.replace(/^0+/, "");
+
+                    // allow only numbers
+                    value = value.replace(/[^0-9]/g, "");
+
+                    field.onChange(Number(value));
+                  }}
                 />
               </FormControl>
 
@@ -264,10 +246,6 @@ UserFormProps) {
             <FormItem>
               <FormLabel>Enter your Status</FormLabel>
               <FormControl>
-                {/* 
-                
-                <Input placeholder="Your location" {...field} /> */}
-
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a Status" />
