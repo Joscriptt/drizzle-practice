@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { createuser, updateUser } from "@/server/user";
+import { createuser } from "@/server/user";
 import React from "react";
 
 const formSchema = z.object({

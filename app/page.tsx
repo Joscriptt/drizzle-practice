@@ -12,9 +12,8 @@ import React from "react";
 import SignOut from "@/components/components/auth/sign-out";
 // import { SignOut } from "@/components/components/auth/register-form";
 
-const session = await auth();
-
 export default async function Home() {
+  const session = await auth();
   if (!session)
     return (
       <div className="flex justify-center items-center h-screen">

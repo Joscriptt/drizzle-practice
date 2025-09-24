@@ -116,7 +116,7 @@ const TrashBinMinimalistic2Bold = ({
               <Button
                 variant="destructive"
                 onClick={handleCancel}
-                disabled={!isDeleting}
+                disabled={!isDeleting && _isPending}
               >
                 Cancel
               </Button>

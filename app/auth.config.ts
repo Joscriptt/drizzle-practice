@@ -29,7 +29,7 @@ export const authConfig = {
       }
       return true;
     },
-    async session({ session, token, trigger }) {
+    async session({ session, token }) {
       session.user.image = token.picture;
       session.user.id = token.sub ?? "";
       session.user.email = token.email ?? "";

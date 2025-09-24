@@ -48,17 +48,9 @@ type User = {
 };
 
 export default function UserAvatar() {
-  const { data: session, status, update } = useSession();
+  const { data: session } = useSession();
   const [user, setUser] = useState<User | null>(null);
-  // const route = useRouter();
 
-  const refreshUserData = async () => {
-    if (session?.user.id) {
-      // Force session refresh to get updated data from database
-      await update();
-    }
-  };
-  // Initialize user from session
   useEffect(() => {
     if (session?.user) {
       setUser({
@@ -71,17 +63,17 @@ export default function UserAvatar() {
     // route.refresh();
   }, [session]);
 
-  useEffect(() => {
-    const handleUserUpdate = () => {
-      refreshUserData();
-    };
+  // useEffect(() => {
+  //   const handleUserUpdate = () => {
+  //     refreshUserData();
+  //   };
 
-    window.addEventListener("userProfileUpdated", handleUserUpdate);
+  //   window.addEventListener("userProfileUpdated", handleUserUpdate);
 
-    return () => {
-      window.removeEventListener("userProfileUpdated", handleUserUpdate);
-    };
-  }, [session]);
+  //   return () => {
+  //     window.removeEventListener("userProfileUpdated", handleUserUpdate);
+  //   };
+  // }, [session]);
 
   if (!user) return null;
 
