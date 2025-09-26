@@ -171,13 +171,14 @@ UserFormProps) {
                 /> */}
                 <Input
                   type="text" // use text to fully control formatting
+                  maxLength={6}
                   placeholder="Your Balance"
                   value={field.value ?? ""}
                   onChange={(e) => {
                     let value = e.target.value;
 
-                    if (value === "") {
-                      field.onChange(undefined); // or null if you prefer
+                    if (value === "" || isNaN(Number(value))) {
+                      field.onChange(null); // or null if you prefer
                       return;
                     }
 

@@ -202,6 +202,7 @@ const TextEditStyle = ({
                       <Input
                         type="text" // use text to control formatting
                         placeholder="Your Balance"
+                        maxLength={8}
                         value={formatNumber(field.value ?? "")}
                         onChange={(e) => {
                           const val = e.target.value;
